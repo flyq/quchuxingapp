@@ -1,0 +1,13 @@
+#ifndef _DFF_CONFIG_HPP
+
+#define EOS_SYMBOL S(4, EOS)
+#define CPLE_SYMBOL S(4, CPLE)
+
+#define TOKEN_SYMBOL CPLE_SYMBOL
+#define TOKEN_CONTRACT N(dacincubator)
+
+#define TOKEN_PRICE 300
+#define START_TIME 1542153600 //1543147200       // 2018/11/25 20:0:0
+#define EOS_QUOTA 500000000         // 50,000 EOS
+
+#endif
