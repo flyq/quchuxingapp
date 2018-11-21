@@ -1,0 +1,12 @@
+#ifndef _DFF_CONFIG_HPP
+
+#define EOS_SYMBOL S(4, EOS)
+#define CPLE_SYMBOL S(4, CPLE)
+
+#define TOKEN_SYMBOL CPLE_SYMBOL
+#define TOKEN_CONTRACT N(dacincubator)
+
+#define START_TIME 1542585600 // 2018/11/19 8:0:0
+#define END_TIME 1542758400 // 2018/11/21 8:0:0
+
+#endif

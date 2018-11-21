@@ -6,7 +6,6 @@
 #include <eosiolib/transaction.hpp>
 
 #include "config.hpp"
-#include "utils.hpp"
 
 typedef double real_type;
 
@@ -14,8 +13,8 @@ using namespace eosio;
 
 using std::string;
 
-class votequchuxin : public contract {
-    public: votequchuxin(account_name self) :
+class exchangetoet : public contract {
+    public: exchangetoet(account_name self) :
         contract(self),
         _global(_self, _self){}
 
@@ -24,15 +23,16 @@ class votequchuxin : public contract {
     // @abi action
     void clear();
     // @abi action
-    void unstake(account_name from);
-    // @abi action
-    void printstake(account_name from);
-
     void onTransfer(account_name from, account_name to,
                     extended_asset quantity, string memo);
 
     void apply(account_name code, action_name action);
 
+    
+    //@abi table accounts
+    struct account_info {
+        uint64_t value;
+    };
 
     //@abi table global
     struct global {
@@ -43,14 +43,9 @@ class votequchuxin : public contract {
     };
 
     typedef singleton<N(global), global> singleton_global;
-    singleton_global _global;   
-    
-    //@abi table voters
-    struct voter_info {
-        uint64_t staked;
-    };
+    singleton_global _global;       
 
-    typedef singleton<N(voters), voter_info> singleton_voters;
+    typedef singleton<N(accounts), account_info> singleton_account;
 
 };
 
@@ -62,7 +57,7 @@ struct st_transfer {
     string       memo;
 };
 
-void votequchuxin::apply(account_name code, action_name action) {   
+void exchangetoet::apply(account_name code, action_name action) {   
     auto &thiscontract = *this;
 
     if (action == N(transfer)) {
@@ -73,14 +68,14 @@ void votequchuxin::apply(account_name code, action_name action) {
 
     if (code != _self) return;
     switch (action) {
-        EOSIO_API(votequchuxin, (init)(clear)(unstake)(printstake));
+        EOSIO_API(exchangetoet, (init)(clear));
     };
 }
 
 extern "C" {
     [[noreturn]] void apply(uint64_t receiver, uint64_t code, uint64_t action) 
     {
-        votequchuxin p(receiver);
+        exchangetoet p(receiver);
         p.apply(code, action);
         eosio_exit(0);
     }

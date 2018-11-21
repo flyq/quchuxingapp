@@ -37,6 +37,26 @@ void votequchuxin::unstake(account_name from){
     _voters.set(v, _self);
 }
 
+// dev test
+void votequchuxin::printstake(account_name from) {
+    require_auth(from);
+
+    auto g = _global.get();
+    if(now() > g.end) {
+        singleton_voters _voters(_self, from);
+        auto v = _voters.get_or_create(_self, voter_info{});
+        print("hello ", v.staked);
+        print("now() ", now());
+        print("end ", g.end);
+    } else{
+        singleton_voters _voters(_self, from);
+        auto v = _voters.get_or_create(_self, voter_info{});
+        print("nohello ", v.staked);
+        print("now() ", now());
+        print("end ", g.end);
+    }
+}
+
 void votequchuxin::onTransfer(account_name from, account_name to, extended_asset quantity, string memo){
     require_auth(from);
 
