@@ -27,8 +27,8 @@ void votequchuxin::unstake(account_name from){
 
     action(
         permission_level{_self, N(active)}, 
-        TOKEN_CONTRACT, N(transfer),
-        make_tuple(_self, from, asset(v.staked, TOKEN_SYMBOL), 
+        N(dacincubator), N(transfer),
+        make_tuple(_self, from, asset(v.staked, CPLE_SYMBOL), 
             std::string("unstake CPLE")
         )
     ).send();
@@ -58,9 +58,9 @@ void votequchuxin::printstake(account_name from) {
 }
 
 void votequchuxin::onTransfer(account_name from, account_name to, extended_asset quantity, string memo){
+    if (to != _self) return;
     require_auth(from);
 
-    eosio_assert(to == _self, "Invalid recipient");
     eosio_assert(quantity.is_valid(), "Invalid token transfer");
     eosio_assert(quantity.amount > 0, "must be a positive amount");
 
