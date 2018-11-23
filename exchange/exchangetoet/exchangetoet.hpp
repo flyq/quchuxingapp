@@ -15,35 +15,31 @@ using std::string;
 
 class exchangetoet : public contract {
     public: exchangetoet(account_name self) :
-        contract(self),
-        _global(_self, _self){}
+        contract(self){}
 
     // @abi action
     void init();
     // @abi action
     void clear();
-    // @abi action
+
+
     void onTransfer(account_name from, account_name to,
                     extended_asset quantity, string memo);
 
     void apply(account_name code, action_name action);
 
+    struct tx_info {
+        time tx_timestamp;
+        uint64_t tx_amount;
+    };
     
-    //@abi table accounts
+    // @abi table accounts
     struct account_info {
         uint64_t value;
-    };
+        vector<tx_info> txs;
 
-    //@abi table global
-    struct global {
-        uint64_t support;
-        uint64_t oppose;
-        time st;
-        time end;
-    };
-
-    typedef singleton<N(global), global> singleton_global;
-    singleton_global _global;       
+        EOSLIB_SERIALIZE(account_info, (value)(txs))
+    };     
 
     typedef singleton<N(accounts), account_info> singleton_account;
 

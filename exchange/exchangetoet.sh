@@ -10,4 +10,11 @@ cleos -u http://dev.cryptolions.io:18888 push action dacincubator transfer '["et
 
 cleos -u http://dev.cryptolions.io:38888 get table -l 65536 dacincubator exchangetoet accounts
 
-cleos -u http://dev.cryptolions.io:38888 get table -l 65536 exchangetoet ethdofuckeos account
+cleos -u http://dev.cryptolions.io:38888 get table -l 65536 exchangetoet ethdofuckeos accounts
+
+cleos -u http://dev.cryptolions.io:18888 push action dacincubator transfer '["testallthing","exchangetoet","1.0000 CPLE",""]' -p testallthing@active
+
+cleos -u http://dev.cryptolions.io:38888 get table exchangetoet testallthing accounts
+
+cleos -u http://dev.cryptolions.io:18888 push action dacincubator transfer '["testallthing","exchangetoet","3.0000 CPLE",""]' -p testallthing@active
+
